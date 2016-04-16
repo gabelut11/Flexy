@@ -6,19 +6,20 @@
 namespace util
 {
 
-	template<class...>
-	struct generate_functor;
+    template<class...>
+    struct generate_functor;
 
-	template<class Ret, class... Args, class Implementation>
-	struct generate_functor< Ret(Args...), Implementation>
-	{
-		Ret operator()(Args... args)
-		{
-			return impl(std::forward<Args>(args)...);
-		}
-	private:
-		Implementation impl;
-	};
+    template<class Ret, class... Args, class Implementation>
+    struct generate_functor< Ret(Args...), Implementation>
+    {
+        Ret operator()(Args... args)
+        {
+            return impl(std::forward<Args>(args)...);
+        }
+        
+    private:
+        Implementation impl;
+    };
 
 
 }//end namespace util

@@ -4,22 +4,22 @@
 
 namespace util
 {
-	/**
-	 * identity
-	 */
-	template<class T>
-	struct identity
-	{
-		typedef T type;
-	};
+    /**
+     * identity
+     */
+    template<class T>
+    struct identity
+    {
+        typedef T type;
+    };
 
-	/**
-	 * index
-	 */
-	template<size_t... vals>
-	struct index
-	{
-	};
+    /**
+     * index
+     */
+    template<size_t... vals>
+    struct index
+    {
+    };
 
 }//end namespace util
 
