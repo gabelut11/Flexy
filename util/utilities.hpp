@@ -12,7 +12,7 @@ namespace util
 template<class T>
 struct identity
 {
-    typedef details::identity_impl<T>::type type;
+    typedef typename details::identity_impl<T>::type type;
 };
 
 //------------------------------------------------------------------------------------------------------
@@ -77,21 +77,10 @@ struct erase_last_n<n, Tuple<Args...> >
 template < size_t n, class... T>
 struct get_last_n;
 
-template<size_t n, template<class...> class Tuple>
-struct get_last_n<n, Tuple<>>
-{
-    typedef Tuple<> type;
-};
-
 template<size_t n, class... Args, template<class...> class Tuple>
 struct get_last_n<n, Tuple<Args...>>
 {
-    private:
-    const static size_t size = sizeof...(Args);
-
-    public:
-    typedef typename std::conditional< (n >= size), Tuple<Args...>, 
-            typename erase_first_n<size-n, Tuple<Args...>>::type>::type type;
+    typedef typename details::get_last_n_impl<n, Tuple<Args...> >::type type;
 };
 
 //------------------------------------------------------------------------------------------------------
@@ -264,6 +253,14 @@ template< class T, template<class...> class Tuple, class... Args>
 struct find_index<T, Tuple<Args...>>
 {
     static const int value = details::find_index_impl< sizeof...(Args), T, Tuple<Args...>>::value;
+};
+
+//-------------------------------------------------------------------------------------------------------
+
+template< class T, class... Args>
+struct contains
+{
+    static const bool value = (find_index<T, Args...>::value >= 0);
 };
 
 //-------------------------------------------------------------------------------------------------------

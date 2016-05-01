@@ -72,6 +72,28 @@ public:
         typename next_t::type >::type type;
 };
 
+//-----------------------------------------------------------------------------------------------------
+
+template < size_t n, class... T>
+struct get_last_n_impl;
+
+template<size_t n, template<class...> class Tuple>
+struct get_last_n_impl<n, Tuple<>>
+{
+    typedef Tuple<> type;
+};
+
+template<size_t n, class... Args, template<class...> class Tuple>
+struct get_last_n_impl<n, Tuple<Args...>>
+{
+    private:
+    const static size_t size = sizeof...(Args);
+
+    public:
+    typedef typename std::conditional< (n >= size), Tuple<Args...>, 
+            typename erase_first_n_impl<size-n, Tuple<Args...>>::type>::type type;
+};
+
 //------------------------------------------------------------------------------------------------------
 
 template<size_t n, class... Args>
