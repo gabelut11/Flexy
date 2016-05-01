@@ -14,10 +14,13 @@
 
 namespace util
 {
+
     
-template<util::creation_type type, class... PolicyArgs>
+template<util::creation_type type, template<class...> class... SmartPtr>
 struct create
 {
+    typedef util::creation_policy<type, SmartPtr...> creator_t;
+    
     template<class...>
     struct types;
     
@@ -46,10 +49,12 @@ struct create
         static Last * create(Args&&... args)
         {
             const static util::creation_type ct = type;
-            typedef typename util::creation_policy<ct, PolicyArgs...> creator_t;
+            //typedef typename util::creation_policy<ct> creator_t;
             return creator_t:: template create<Last>(std::forward<Args>(args)...);
         }
     };
+        
+    
 };
 
 

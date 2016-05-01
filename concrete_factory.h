@@ -16,13 +16,13 @@
 namespace Flexy
 {
     
-template<util::creation_type c1>
+template<util::creation_type c1, template<class...> class... SmartPtr>
 struct factory
 {
     template<class... Args>
     struct create
     {
-        typedef typename util::create<c1>:: template types<Args...> type;
+        typedef typename util::create<c1, SmartPtr...>:: template types<Args...> type;
     };
 };
 

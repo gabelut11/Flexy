@@ -35,9 +35,14 @@ int main(int argc, char** argv) {
     using namespace util;
     using my_factory1 =  factory< creation_type::on_heap>::create<A, B>::type;
     using my_factory2 =  factory< creation_type::on_heap>::create<A, B, C>::type;
+    
+    using my_factory_p3 = factory< creation_type::smart_ptr, std::unique_ptr>::create<A, B>::type;
+    using my_factory3 = factory< creation_type::smart_ptr, std::unique_ptr>::create<A, B, C>::type;
 
   
     my_factory1 *p1 = new my_factory2;
+    my_factory_p3 *p3 = new my_factory3;
+    
  
     p1->create<A>();
     p1->create<B>();
