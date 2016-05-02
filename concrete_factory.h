@@ -18,10 +18,10 @@ namespace Flexy
 
 namespace
 {
+
 template<template<class...> class >
-struct PlaceHolder
-{
-};
+struct PlaceHolder {};
+
 }//end namespace
     
 template<util::creation_type c1, template<class...> class SmartPtr = PlaceHolder>
