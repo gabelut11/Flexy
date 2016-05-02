@@ -14,7 +14,6 @@
 
 namespace util
 {
-
     
 template<util::creation_type type, template<class...> class... SmartPtr>
 struct create
@@ -52,9 +51,7 @@ struct create
             //typedef typename util::creation_policy<ct> creator_t;
             return creator_t:: template create<Last>(std::forward<Args>(args)...);
         }
-    };
-        
-    
+    }; 
 };
 
 

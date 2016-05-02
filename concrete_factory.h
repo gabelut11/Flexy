@@ -15,8 +15,16 @@
 
 namespace Flexy
 {
+
+namespace
+{
+template<template<class...> class >
+struct PlaceHolder
+{
+};
+}//end namespace
     
-template<util::creation_type c1, template<class...> class... SmartPtr>
+template<util::creation_type c1, template<class...> class SmartPtr = PlaceHolder>
 struct factory
 {
     template<class... Args>
