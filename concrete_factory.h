@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   concrete_factory.h
  * Author: gabi
  *
@@ -8,29 +8,20 @@
 #ifndef CONCRETE_FACTORY_H
 #define	CONCRETE_FACTORY_H
 
-#include "util/generate_hierarchy.hpp"
-#include "util/creation_policy.hpp"
-#include "util/factory_utilities.hpp"
+#include "generate/generate_factory.hpp"
+#include "generate/details/creation/options.hpp"
 #include <tuple>
 
 namespace Flexy
 {
 
-namespace
-{
-
-template<template<class...> class >
-struct PlaceHolder {};
-
-}//end namespace
-    
-template<util::creation_type c1, template<class...> class SmartPtr = PlaceHolder>
-struct factory
+template<creation c1, template<class...> class SmartPtr = generate::PlaceHolder>
+struct generate_factory
 {
     template<class... Args>
-    struct create
+    struct that_creates
     {
-        typedef typename util::create<c1, SmartPtr...>:: template types<Args...> type;
+        typedef typename generate::factory<c1, SmartPtr>:: template for_types<Args...> type;
     };
 };
 
