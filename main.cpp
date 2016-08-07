@@ -72,7 +72,7 @@ using namespace std;
         typedef generate_factory< creation::on_heap>::that_creates<A, B, C>::type ABC_Factory;
 
         The new factory inherits from Factory_AB. So it can be used is places where Factory_AB was used.
-        When declaring a factory like Factory_ABC the follwing hierarchyis created:
+        When declaring a factory like Factory_ABC the follwing hierarchy is created:
 
             Factory_A       Factory_B
                 |               |
@@ -106,15 +106,15 @@ using namespace std;
             Factory_AB *f = new Factory_ABC;
             SomeClass obj(f);
 
-    --> Also the new factory converts into a "smaller" factory, so we can reduce the factory when we want.
-        If we want in certain places to construct only C objects with Factory_ABC:
+    --> Also the new factory converts into a "smaller" factory, so we can reduce the factory's
+        functionality when we want. If we want, in certain places, to construct only C objects:
 
         //Create factory that constructs A, B, C:
             Factory_ABC *abc = new Factory_ABC;
 
         //We want to limit fuctionality here and construct ony C:
             typedef	generate_factory< creation::on_heap>::that_creates<C>::type Factory_C;
-            Factory_C *factory_c = abc;  //creates A, B, C
+            Factory_C *factory_c = abc;
 
             some_function_that_can_handle_only_C(factory_c);
 
